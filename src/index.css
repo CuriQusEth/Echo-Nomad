@@ -1,0 +1,12 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .echo-gradient { background: radial-gradient(circle at 50% 50%, #1a1a3a 0%, #0d0d1a 100%); }
+  .glow-cyan { text-shadow: 0 0 10px rgba(0, 255, 255, 0.5); }
+  .glow-gold { text-shadow: 0 0 10px rgba(212, 175, 55, 0.5); }
+  .glass-panel { background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(12px); border: 1px solid rgba(255, 255, 255, 0.1); }
+  .resonance-bar { background: linear-gradient(90deg, #00ffff 0%, #0088ff 100%); }
+  .energy-bar { background: linear-gradient(90deg, #ffd700 0%, #ff8800 100%); }
+  .thirst-bar { background: linear-gradient(90deg, #4ade80 0%, #166534 100%); }
+  .horizon-line { height: 1px; background: linear-gradient(90deg, transparent 0%, rgba(226, 209, 195, 0.2) 50%, transparent 100%); }
+}
