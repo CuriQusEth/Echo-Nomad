@@ -1,3 +1,5 @@
+"use client";
+
 import React, { useEffect, useRef, useState } from 'react';
 import { motion } from 'motion/react';
 import { GameState } from '../types';

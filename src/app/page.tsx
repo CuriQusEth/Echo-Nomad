@@ -1,15 +1,12 @@
-import React, { useState } from 'react';
-import { TitleScreen } from './components/TitleScreen';
-import { GameEngine } from './components/game/GameEngine';
-import { GameOverScreen } from './components/GameOverScreen';
-import { LeaderboardScreen } from './components/Leaderboard';
-import { GameState } from './types';
-import { WagmiProvider } from 'wagmi';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { config as wagmiConfig } from './lib/web3';
-import { Droplet, Battery, Radio } from 'lucide-react';
+"use client";
 
-const queryClient = new QueryClient();
+import React, { useState } from 'react';
+import { TitleScreen } from '../components/TitleScreen';
+import { GameEngine } from '../components/game/GameEngine';
+import { GameOverScreen } from '../components/GameOverScreen';
+import { LeaderboardScreen } from '../components/Leaderboard';
+import { GameState } from '../types';
+import { Droplet, Battery, Radio } from 'lucide-react';
 
 const INITIAL_GAME_STATE: GameState = {
   screen: 'TITLE',
@@ -96,35 +93,31 @@ export default function App() {
   };
 
   return (
-    <WagmiProvider config={wagmiConfig}>
-      <QueryClientProvider client={queryClient}>
-        <div className="relative w-full h-full h-[100dvh] bg-[#0d0d1a] text-[#e2d1c3] font-sans overflow-hidden select-none">
-          {gameState.screen === 'TITLE' && (
-            <TitleScreen onStart={startGame} onLeaderboard={navToLeaderboard} />
-          )}
+    <div className="relative w-full h-full h-[100dvh] bg-[#0d0d1a] text-[#e2d1c3] font-sans overflow-hidden select-none">
+      {gameState.screen === 'TITLE' && (
+        <TitleScreen onStart={startGame} onLeaderboard={navToLeaderboard} />
+      )}
 
-          {gameState.screen === 'GAME' && (
-            <GameEngine 
-              setScreen={(screen) => setGameState(prev => ({ ...prev, screen }))}
-              updateGameState={setGameState}
-            />
-          )}
+      {gameState.screen === 'GAME' && (
+        <GameEngine 
+          setScreen={(screen) => setGameState(prev => ({ ...prev, screen }))}
+          updateGameState={setGameState}
+        />
+      )}
 
-          {gameState.screen === 'GAMEOVER' && (
-            <GameOverScreen 
-              gameState={gameState} 
-              onRestart={startGame} 
-              onMenu={navToMenu} 
-            />
-          )}
+      {gameState.screen === 'GAMEOVER' && (
+        <GameOverScreen 
+          gameState={gameState} 
+          onRestart={startGame} 
+          onMenu={navToMenu} 
+        />
+      )}
 
-          {gameState.screen === 'LEADERBOARD' && (
-            <LeaderboardScreen onMenu={navToMenu} />
-          )}
+      {gameState.screen === 'LEADERBOARD' && (
+        <LeaderboardScreen onMenu={navToMenu} />
+      )}
 
-          <HUD />
-        </div>
-      </QueryClientProvider>
-    </WagmiProvider>
+      <HUD />
+    </div>
   );
 }
