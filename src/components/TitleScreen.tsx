@@ -46,11 +46,11 @@ export function TitleScreen({ onStart, onLeaderboard }: TitleScreenProps) {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ duration: 1, delay: 1 }}
-          className="w-full flex flex-col gap-4 mt-8"
+          className="w-full max-w-xs flex flex-col gap-3 mt-6"
         >
           <button
             onClick={onStart}
-            className="glass-panel text-white py-4 px-6 rounded-2xl overflow-hidden transition-all hover:border-[#D4AF37]/50 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] flex items-center justify-center group"
+            className="glass-panel text-white py-3 sm:py-4 px-6 rounded-2xl overflow-hidden transition-all hover:border-[#D4AF37]/50 hover:shadow-[0_0_20px_rgba(212,175,55,0.2)] flex items-center justify-center group"
           >
             <Play className="w-5 h-5 mr-3 text-[#D4AF37] group-hover:scale-110 transition-transform" />
             <span className="tracking-[0.2em] font-bold text-xs uppercase text-[#D4AF37]">BEGIN JOURNEY</span>
@@ -58,30 +58,30 @@ export function TitleScreen({ onStart, onLeaderboard }: TitleScreenProps) {
 
           <button
             onClick={onLeaderboard}
-            className="glass-panel text-[#e2d1c3] py-4 px-6 rounded-2xl transition-all hover:bg-white/5 hover:border-[#e2d1c3]/30 flex items-center justify-center group"
+            className="glass-panel text-[#e2d1c3] py-3 sm:py-4 px-6 rounded-2xl transition-all hover:bg-white/5 hover:border-[#e2d1c3]/30 flex items-center justify-center group"
           >
             <Trophy className="w-5 h-5 mr-3 opacity-80 group-hover:text-[#D4AF37] transition-colors" />
             <span className="tracking-[0.1em] text-xs uppercase opacity-80">Chronicles</span>
           </button>
 
           {/* Web3 Connect */}
-          <div className="mt-4 pt-6">
+          <div className="mt-2 pt-4">
             {!isConnected ? (
               <button
                 onClick={() => connect({ connector: connectors[0] })}
                 className="w-full flex items-center justify-center py-3 rounded-2xl glass-panel hover:bg-white/10 transition-colors"
               >
                 <Wallet className="w-4 h-4 mr-2 opacity-70" />
-                <span className="text-[10px] tracking-widest uppercase">Connect Wallet</span>
+                <span className="text-[9px] tracking-widest uppercase">Connect Wallet</span>
               </button>
             ) : (
-              <div className="flex justify-between items-center glass-panel p-4 rounded-2xl">
-                <span className="text-[10px] uppercase font-bold text-white/50">Wallet Status</span>
-                <div className="flex items-center gap-3">
-                  <span className="text-sm font-mono text-[#e2d1c3]">{address?.slice(0, 6)}...{address?.slice(-4)}</span>
+              <div className="flex justify-between items-center glass-panel p-3 rounded-2xl">
+                <span className="text-[9px] uppercase font-bold text-white/50">Wallet</span>
+                <div className="flex items-center gap-2">
+                  <span className="text-xs font-mono text-[#e2d1c3]">{address?.slice(0, 6)}...{address?.slice(-4)}</span>
                   <button
                     onClick={() => disconnect()}
-                    className="text-[9px] uppercase px-2 py-1 rounded bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-colors"
+                    className="text-[8px] uppercase px-2 py-1 rounded bg-red-500/20 text-red-300 hover:bg-red-500/30 transition-colors"
                   >
                     Disconnect
                   </button>
@@ -92,9 +92,9 @@ export function TitleScreen({ onStart, onLeaderboard }: TitleScreenProps) {
         </motion.div>
       </div>
 
-      <div className="absolute bottom-6 w-full flex flex-col items-center opacity-40 text-[#e2d1c3]">
-        <span className="text-[9px] uppercase tracking-widest font-mono">App ID: 68f52e728c4fe3f562003e76</span>
-        <span className="text-[9px] font-mono">Builder: bc_pywn60l0</span>
+      <div className="absolute bottom-4 w-full flex flex-col items-center opacity-40 text-[#e2d1c3]">
+        <span className="text-[8px] uppercase tracking-widest font-mono">App ID: 68f52e728c4fe3f562003e76</span>
+        <span className="text-[8px] font-mono">Builder: bc_pywn60l0</span>
       </div>
     </div>
   );

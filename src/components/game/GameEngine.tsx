@@ -16,6 +16,7 @@ const pseudoRandom = (x: number) => {
 
 export function GameEngine({ setScreen, updateGameState }: GameEngineProps) {
   const canvasRef = useRef<HTMLCanvasElement>(null);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   
   // Game internal state
   const scrollRef = useRef(0);
@@ -43,8 +44,8 @@ export function GameEngine({ setScreen, updateGameState }: GameEngineProps) {
   };
 
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const wrapper = wrapperRef.current;
+    if (!canvas || !wrapper) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;
 
@@ -52,12 +53,15 @@ export function GameEngine({ setScreen, updateGameState }: GameEngineProps) {
     let lastTime = performance.now();
 
     const resize = () => {
-      canvas.width = window.innerWidth;
-      canvas.height = window.innerHeight;
+      if (!wrapper || !canvas) return;
+      canvas.width = wrapper.clientWidth;
+      canvas.height = wrapper.clientHeight;
       playerRef.current.x = canvas.width / 4;
       playerRef.current.targetX = canvas.width / 4;
     };
-    window.addEventListener('resize', resize);
+    
+    const resizeObserver = new ResizeObserver(() => resize());
+    resizeObserver.observe(wrapper);
     resize();
 
     const render = (time: number) => {
@@ -222,7 +226,7 @@ export function GameEngine({ setScreen, updateGameState }: GameEngineProps) {
 
     return () => {
       cancelAnimationFrame(animationId);
-      window.removeEventListener('resize', resize);
+      resizeObserver.disconnect();
     };
   }, []);
 
@@ -269,6 +273,7 @@ export function GameEngine({ setScreen, updateGameState }: GameEngineProps) {
 
   return (
     <div 
+      ref={wrapperRef}
       className="absolute inset-0 touch-none overflow-hidden"
       onPointerDown={handlePointerDown}
       onPointerMove={handlePointerMove}

@@ -83,19 +83,19 @@ export function GameOverScreen({ gameState, onRestart, onMenu }: GameOverScreenP
       <motion.div
         initial={{ opacity: 0, scale: 0.95 }}
         animate={{ opacity: 1, scale: 1 }}
-        className="z-10 glass-panel p-8 rounded-3xl max-w-md w-full flex flex-col items-center text-center shadow-2xl"
+        className="z-10 glass-panel p-6 sm:p-8 rounded-3xl w-full flex flex-col items-center text-center shadow-2xl"
       >
-        <Hexagon className="w-12 h-12 text-[#D4AF37] mb-4 opacity-50" />
-        <h2 className="text-3xl font-serif tracking-[0.2em] glow-gold text-[#D4AF37] mb-6">JOURNEY ENDED</h2>
+        <Hexagon className="w-10 h-10 sm:w-12 sm:h-12 text-[#D4AF37] mb-3 sm:mb-4 opacity-50" />
+        <h2 className="text-2xl sm:text-3xl font-serif tracking-[0.2em] glow-gold text-[#D4AF37] mb-4 sm:mb-6">JOURNEY ENDED</h2>
         
-        <div className="space-y-4 w-full mb-8">
+        <div className="space-y-3 sm:space-y-4 w-full mb-6">
           <div className="flex justify-between items-center border-b border-white/10 pb-2">
-            <span className="text-[#e2d1c3]/70 tracking-wider text-[10px] uppercase flex items-center"><Activity className="w-4 h-4 mr-2"/> DISTANCE</span>
-            <span className="text-cyan-400 font-mono text-lg">{Math.floor(gameState.score)} m</span>
+            <span className="text-[#e2d1c3]/70 tracking-wider text-[9px] sm:text-[10px] uppercase flex items-center"><Activity className="w-3 h-3 sm:w-4 sm:h-4 mr-2"/> DISTANCE</span>
+            <span className="text-cyan-400 font-mono text-base sm:text-lg">{Math.floor(gameState.score)} m</span>
           </div>
           <div className="flex justify-between items-center border-b border-white/10 pb-2">
-            <span className="text-[#e2d1c3]/70 tracking-wider text-[10px] uppercase flex items-center"><Trophy className="w-4 h-4 mr-2"/> RELICS FOUND</span>
-            <span className="text-[#D4AF37] font-mono text-lg">{gameState.relicsFound}</span>
+            <span className="text-[#e2d1c3]/70 tracking-wider text-[9px] sm:text-[10px] uppercase flex items-center"><Trophy className="w-3 h-3 sm:w-4 sm:h-4 mr-2"/> RELICS FOUND</span>
+            <span className="text-[#D4AF37] font-mono text-base sm:text-lg">{gameState.relicsFound}</span>
           </div>
         </div>
 
@@ -103,7 +103,7 @@ export function GameOverScreen({ gameState, onRestart, onMenu }: GameOverScreenP
           <button 
             onClick={handleSayGM}
             disabled={isTxPending || !address}
-            className="flex items-center justify-center w-full px-8 py-4 bg-[#D4AF37] text-black font-bold text-xs uppercase tracking-[0.2em] rounded-2xl shadow-lg hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+            className="flex items-center justify-center w-full px-4 sm:px-8 py-3 sm:py-4 bg-[#D4AF37] text-black font-bold text-[10px] sm:text-xs uppercase tracking-[0.1em] rounded-2xl shadow-lg hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
           >
             {isTxPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : 'SAY GM ON-CHAIN'}
           </button>
@@ -111,7 +111,7 @@ export function GameOverScreen({ gameState, onRestart, onMenu }: GameOverScreenP
           <button 
             onClick={handleRecordPilgrimage}
             disabled={isSignPending || !address}
-            className="relative flex items-center justify-center w-full py-4 glass-panel border border-[#D4AF37]/30 rounded-2xl text-[#D4AF37] tracking-[0.2em] uppercase hover:bg-[#D4AF37]/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[10px] font-bold"
+            className="relative flex items-center justify-center w-full py-3 sm:py-4 glass-panel border border-[#D4AF37]/30 rounded-2xl text-[#D4AF37] tracking-[0.1em] sm:tracking-[0.2em] uppercase hover:bg-[#D4AF37]/10 transition-colors disabled:opacity-50 disabled:cursor-not-allowed text-[9px] sm:text-[10px] font-bold"
           >
             {isSignPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : 'RECORD PILGRIMAGE'}
           </button>
