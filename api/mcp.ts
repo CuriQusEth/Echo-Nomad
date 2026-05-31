@@ -18,6 +18,15 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
       status: "active",
       description: "Active MCP server for Echo Nomad Orchestrator Agent",
       capabilities: ["nomadic-exploration", "echo-mechanics", "multi-realm-management"],
+      tools: [
+        { name: 'get_race_status', description: 'Get current race status', inputSchema: { type: 'object', properties: {} } },
+        { name: 'start_race', description: 'Start a new race', inputSchema: { type: 'object', properties: {} } },
+        { name: 'get_leaderboard', description: 'Get race leaderboard', inputSchema: { type: 'object', properties: {} } },
+        { name: 'optimize_speed', description: 'Optimize nomad speed', inputSchema: { type: 'object', properties: {} } },
+        { name: 'get_track_info', description: 'Get track information', inputSchema: { type: 'object', properties: {} } }
+      ],
+      prompts: [],
+      resources: [],
       timestamp: new Date().toISOString()
     });
   }
@@ -29,7 +38,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
 
       const wrapRpc = (result: any) => {
         if (jsonrpc) {
-          return { jsonrpc: "2.0", id, result };
+          return { jsonrpc: "2.0", id, result, ...result };
         }
         return result;
       };
