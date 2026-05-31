@@ -47,6 +47,10 @@ async function startServer() {
     });
   });
 
+  app.get("/.well-known/agent-card.json", (req, res) => {
+    res.sendFile(path.join(process.cwd(), 'public', '.well-known', 'agent-card.json'));
+  });
+
   // Vite middleware for development
   if (process.env.NODE_ENV !== "production") {
     const vite = await createViteServer({
