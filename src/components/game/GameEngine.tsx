@@ -45,6 +45,7 @@ export function GameEngine({ setScreen, updateGameState }: GameEngineProps) {
 
   useEffect(() => {
     const wrapper = wrapperRef.current;
+    const canvas = canvasRef.current;
     if (!canvas || !wrapper) return;
     const ctx = canvas.getContext('2d');
     if (!ctx) return;

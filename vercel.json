@@ -1,4 +1,10 @@
 {
+  "rewrites": [
+    {
+      "source": "/.well-known/agent-card.json",
+      "destination": "/api/agentCard"
+    }
+  ],
   "headers": [
     {
       "source": "/.well-known/agent-card.json",
