@@ -25,18 +25,25 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
   if (req.method === 'POST') {
     try {
       const body = req.body;
-      const { method, params } = body || {};
+      const { method, params, id, jsonrpc } = body || {};
+
+      const wrapRpc = (result: any) => {
+        if (jsonrpc) {
+          return { jsonrpc: "2.0", id, result };
+        }
+        return result;
+      };
 
       if (method === 'initialize') {
-        return res.status(200).json({
-          protocolVersion: "1.0.0",
+        return res.status(200).json(wrapRpc({
+          protocolVersion: "2024-11-05",
           capabilities: { tools: {} },
           serverInfo: { name: "Echo Nomad MCP Endpoint", version: "1.0.0" }
-        });
+        }));
       }
 
       if (method === 'tools/list') {
-        return res.status(200).json({
+        return res.status(200).json(wrapRpc({
           tools: [
             { name: 'get_race_status', description: 'Get current race status', inputSchema: { type: 'object', properties: {} } },
             { name: 'start_race', description: 'Start a new race', inputSchema: { type: 'object', properties: {} } },
@@ -44,7 +51,7 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
             { name: 'optimize_speed', description: 'Optimize nomad speed', inputSchema: { type: 'object', properties: {} } },
             { name: 'get_track_info', description: 'Get track information', inputSchema: { type: 'object', properties: {} } }
           ]
-        });
+        }));
       }
 
       if (method === 'tools/call') {
@@ -58,19 +65,19 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
           case 'get_track_info': resultText = 'Track Info: Next checkpoint in 400m. Incoming sandstorm detected.'; break;
           default: resultText = `Unknown tool: ${toolName}`;
         }
-        return res.status(200).json({ content: [{ type: 'text', text: resultText }] });
+        return res.status(200).json(wrapRpc({ content: [{ type: 'text', text: resultText }] }));
       }
 
-      if (method === 'prompts/list') { return res.status(200).json({ prompts: [] }); }
-      if (method === 'resources/list') { return res.status(200).json({ resources: [] }); }
+      if (method === 'prompts/list') { return res.status(200).json(wrapRpc({ prompts: [] })); }
+      if (method === 'resources/list') { return res.status(200).json(wrapRpc({ resources: [] })); }
 
-      return res.status(200).json({
+      return res.status(200).json(wrapRpc({
         status: "success",
         message: "MCP command received",
         agent: "Echo Nomad Orchestrator",
         receivedAt: new Date().toISOString(),
         payload: body
-      });
+      }));
 
     } catch (error) {
       return res.status(400).json({ error: "Invalid MCP request" });

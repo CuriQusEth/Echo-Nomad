@@ -39,6 +39,11 @@ export default function handler(req: VercelRequest, res: VercelResponse) {
           "description": "Main agent control API"
         }
       ],
+      "skills": [
+        { "name": "nomadic-exploration", "description": "Manage nomadic patterns" },
+        { "name": "echo-mechanics", "description": "Handle echo mechanics" },
+        { "name": "multi-realm-management", "description": "Manage multiple realms" }
+      ],
       "capabilities": [
         "nomadic-exploration",
         "echo-mechanics",
