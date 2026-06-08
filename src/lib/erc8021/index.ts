@@ -1,7 +1,7 @@
 /* ERC-8021: Transaction Attribution */
 
 export const ATTRIBUTION_CODE = '[ATTRIBUTION_CODE]';
-export const BUILDER_CODE = 'bc_pywn60l0';
+export const BUILDER_CODE = '[BUILDER_CODE]';
 
 /**
  * Appends builder code attribution to the transaction data.

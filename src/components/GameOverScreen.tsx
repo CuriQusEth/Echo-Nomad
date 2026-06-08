@@ -12,11 +12,11 @@ interface GameOverScreenProps {
   gameState: GameState;
   onRestart: () => void;
   onMenu: () => void;
+  children?: React.ReactNode;
 }
 
-export function GameOverScreen({ gameState, onRestart, onMenu }: GameOverScreenProps) {
+export function GameOverScreen({ gameState, onRestart, onMenu, children }: GameOverScreenProps) {
   const { address } = useAccount();
-  const { sendTransaction, isPending: isTxPending } = useSendTransaction();
   const { signMessage, isPending: isSignPending } = useSignMessage();
   const [submissionStatus, setSubmissionStatus] = useState<string>('');
 
@@ -50,31 +50,6 @@ export function GameOverScreen({ gameState, onRestart, onMenu }: GameOverScreenP
     }
   };
 
-  const handleSayGM = () => {
-    if (!address) {
-      setSubmissionStatus('Please connect wallet first.');
-      return;
-    }
-    
-    // Convert 'GM' to hex: 0x474d
-    // Append attribution if needed
-    const txData = withERC8021Attribution('0x474d');
-
-    setSubmissionStatus('Saying GM...');
-    sendTransaction({
-      to: address, // Send to self as a mock action
-      data: txData,
-      value: 0n,
-    }, {
-      onSuccess: (hash) => {
-        setSubmissionStatus(`GM acknowledged! Tx: ${hash.slice(0, 8)}...`);
-      },
-      onError: (err) => {
-        setSubmissionStatus('Transaction failed.');
-      }
-    });
-  };
-
   return (
     <div className="relative w-full h-full flex flex-col items-center justify-center echo-gradient p-6 overflow-hidden text-[#e2d1c3]">
       {/* Background static */}
@@ -100,14 +75,6 @@ export function GameOverScreen({ gameState, onRestart, onMenu }: GameOverScreenP
         </div>
 
         <div className="flex flex-col gap-3 w-full">
-          <button 
-            onClick={handleSayGM}
-            disabled={isTxPending || !address}
-            className="flex items-center justify-center w-full px-4 sm:px-8 py-3 sm:py-4 bg-[#D4AF37] text-black font-bold text-[10px] sm:text-xs uppercase tracking-[0.1em] rounded-2xl shadow-lg hover:brightness-110 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
-          >
-            {isTxPending ? <Loader2 className="w-4 h-4 animate-spin mr-2" /> : 'SAY GM ON-CHAIN'}
-          </button>
-          
           <button 
             onClick={handleRecordPilgrimage}
             disabled={isSignPending || !address}
@@ -136,6 +103,7 @@ export function GameOverScreen({ gameState, onRestart, onMenu }: GameOverScreenP
               MENU
             </button>
           </div>
+          {children}
         </div>
       </motion.div>
     </div>
