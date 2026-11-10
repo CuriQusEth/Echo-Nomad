@@ -38,7 +38,7 @@ export function TitleScreen({ onStart, onLeaderboard }: TitleScreenProps) {
           <p className="mt-4 opacity-70 tracking-wider text-sm flex items-center justify-center gap-3 text-[10px] uppercase">
             <span>Pilgrimage 041</span>
             <span className="h-3 w-[1px] bg-white/20"></span>
-            <span>Base Mainnet</span>
+            <span className="text-cyan-400 font-medium">Base Mainnet • Denim</span>
           </p>
         </motion.div>
 

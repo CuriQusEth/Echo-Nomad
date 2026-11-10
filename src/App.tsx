@@ -113,7 +113,8 @@ export default function App() {
       <div className="relative w-full h-[100dvh] sm:h-[844px] sm:w-[390px] sm:rounded-[2.5rem] sm:border-[10px] sm:border-neutral-900 bg-[#0d0d1a] text-[#e2d1c3] font-sans overflow-hidden select-none sm:shadow-[0_0_50px_rgba(34,211,238,0.1)] flex-shrink-0">
         
         {/* Connection Widget */}
-        <div className="absolute top-4 right-4 z-[100]">
+        <div className="absolute top-4 right-4 z-[100] flex items-center gap-1.5">
+          <span className="px-2 py-0.5 text-[8px] font-mono uppercase bg-cyan-950/60 border border-cyan-500/30 text-cyan-400 rounded-full">Base Denim</span>
           {!isConnected ? (
              <button 
                onClick={() => connect({ connector: injected() })}

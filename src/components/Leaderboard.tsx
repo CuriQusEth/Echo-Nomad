@@ -33,7 +33,7 @@ export function LeaderboardScreen({ onMenu }: LeaderboardScreenProps) {
         <div className="text-center mb-6">
           <Trophy className="w-10 h-10 sm:w-12 sm:h-12 text-[#D4AF37] mx-auto mb-3 opacity-50" />
           <h2 className="text-2xl sm:text-3xl font-serif tracking-[0.1em] sm:tracking-[0.2em] glow-gold text-[#D4AF37]">CHRONICLES</h2>
-          <p className="opacity-50 mt-2 text-[9px] sm:text-[10px] tracking-widest uppercase">Base Mainnet Global Ranks</p>
+          <p className="opacity-50 mt-2 text-[9px] sm:text-[10px] tracking-widest uppercase">Base Mainnet (Denim) Global Ranks</p>
         </div>
 
         <div className="flex-1 overflow-y-auto pr-2 pb-10">

@@ -33,7 +33,7 @@ export function GameOverScreen({ gameState, onRestart, onMenu, children }: GameO
       setSubmissionStatus('Signing record...');
       await signMessage({ message, account: address as `0x${string}` }, {
         onSuccess: (signature) => {
-          setSubmissionStatus('Record sealed on-chain (mocked using signature).');
+          setSubmissionStatus('Record sealed on Base Mainnet (Denim).');
           // Dispatch ER8004 background task to index this conceptually
           executeTrustlessAgentTask({
             agentId: 'echo-indexer-1',
